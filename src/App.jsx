@@ -1,22 +1,43 @@
-import { Button } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./index.module.less";
-import { addCounter } from "./store/reducerModule/rootReducer";
-const App = () => {
-  const counter = useSelector((state) => state.rootReducer.counter);
-  const dispatch = useDispatch();
+import router from "@/router";
+import { getToken } from "@/utils/auth";
+import { useEffect } from "react";
+import { useLocation, useNavigate, useRoutes } from "react-router-dom";
 
-  const add = () => {
-    dispatch(addCounter(10));
-  };
+const ToPage = () => {
+  const navigateTo = useNavigate();
+  useEffect(() => {
+    navigateTo("/pag1");
+  }, []);
+  return <div></div>;
+};
+
+const ToLogin = () => {
+  const navigateTo = useNavigate();
+  useEffect(() => {
+    navigateTo("/login");
+  }, []);
+  return <div></div>;
+};
+
+const BeforeRouterEnter = () => {
+  const outlet = useRoutes(router);
+  const location = useLocation();
+  // 访问登录页，有token，跳转首页
+  // 访问不是登录页，无token，跳转登录页
+  const token = getToken() || "";
+  if (location.pathname === "/login" && token) {
+    return <ToPage />;
+  }
+  if (location.pathname !== "/login" && !token) {
+    return <ToLogin />;
+  }
+  return outlet;
+};
+const App = () => {
   return (
-    <div className={styles.pageBox}>
-      3333
-      <div className={styles.pageItem} onClick={add}>
-        {counter}
-        <Button type="primary">Button</Button>
-        aaaaaaaaaaaaa
-      </div>
+    <div>
+      {/* 路由展示 */}
+      <BeforeRouterEnter />
     </div>
   );
 };

@@ -21,6 +21,7 @@ module.exports = {
     // quotes: ["error", "single"], // 使用单引号
     eqeqeq: 2, //必须使用全等
     "no-undef": 0,
+    "no-debugger": 0,
     "no-constant-condition": 2, // 禁止在条件中使用常量表达式 if(true) if(1)
     "no-dupe-keys": 2, // 在创建对象字面量时不允许键重复 {a:1,a:1}
     "no-dupe-args": 2, // 函数参数不能重复
