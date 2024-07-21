@@ -87,18 +87,15 @@ service.interceptors.response.use(
   },
   (error) => {
     console.log("err" + error);
-    let { message } = error;
-    if (message === "Network Error") {
-      message = "后端接口连接异常";
-    } else if (message.includes("timeout")) {
-      message = "系统接口请求超时";
-    } else if (message.includes("Request failed with status code")) {
-      message = "系统接口" + message.substr(message.length - 3) + "异常";
+    let { message: msg } = error;
+    if (msg === "Network Error") {
+      msg = "后端接口连接异常";
+    } else if (msg.includes("timeout")) {
+      msg = "系统接口请求超时";
+    } else if (msg.includes("Request failed with status code")) {
+      msg = "系统接口" + msg.substr(msg.length - 3) + "异常";
     }
-    message.error({
-      content: message,
-      duration: 5 * 1000,
-    });
+    message.error(msg);
     return Promise.reject(error);
   },
 );

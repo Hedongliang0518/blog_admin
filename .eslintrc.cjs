@@ -20,6 +20,7 @@ module.exports = {
     // “error” or 2 -将规则视为一个错误 (退出码为1)
     // quotes: ["error", "single"], // 使用单引号
     eqeqeq: 2, //必须使用全等
+    "no-unused-vars": 0,
     "no-undef": 0,
     "no-debugger": 0,
     "no-constant-condition": 2, // 禁止在条件中使用常量表达式 if(true) if(1)
