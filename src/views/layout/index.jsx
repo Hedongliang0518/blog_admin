@@ -9,19 +9,23 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [breadcrumb, setBreadcrumb] = useState([]);
+
+  // 获取面包屑数据
+  const getBreadcrumb = (data) => {
+    setBreadcrumb(data)
+  }
 
   return (
     <Layout className={styles.layoutBox}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu />
+        <Menu getBreadcrumb={getBreadcrumb}/>
       </Sider>
       <Layout>
-        <Header className={styles.headerBox} style={{ padding: 0, background: 'rgb(246, 255, 237)' }} >
+        <Header className={styles.headerBox} style={{ padding: 0, background: '#001529' }} >
           {/* 面包屑区域 */}
-          <Breadcrumb className={styles.breadcrumbBox}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+          <Breadcrumb className={styles.breadcrumbBox} items={breadcrumb}>
           </Breadcrumb>
           {/* 用户信息区域 */}
           <div className={styles.userBox}>
