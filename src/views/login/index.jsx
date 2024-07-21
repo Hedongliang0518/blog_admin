@@ -53,7 +53,7 @@ const LoginPage = () => {
       // addLight()
       // addPlan()
       // addReflector()
-      move()
+      // move()
     }
     first = false
   }
