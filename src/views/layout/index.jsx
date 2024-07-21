@@ -32,7 +32,7 @@ const App = () => {
           {/* 内容视窗 */}
           <Outlet />
         </Content>
-        <Footer className={styles.footerBox}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer className={styles.footerBox}>hedongliang.com</Footer>
       </Layout>
     </Layout>
   );

@@ -10,6 +10,7 @@ const initialState = {
   avatar: "",
   roles: [],
   permissions: [],
+  routerList: []
 };
 
 const counterSlice = createSlice({
@@ -31,9 +32,9 @@ const counterSlice = createSlice({
       state.token = "";
       state.roles = [];
       state.permissions = [];
+      state.routerList = [];
       removeToken()
     },
-
     // 获取用户信息
     SetInfo: (state, { payload }) => {
       const user = payload.data.user;
@@ -55,9 +56,14 @@ const counterSlice = createSlice({
         avatar: avatar
       }
     },
+    // 登录
+    setRouter: (state, { payload }) => {
+      console.log('payload', payload);
+      state.routerList = payload;
+    },
   },
 });
 
-export const { Login, LogOut, SetInfo } = counterSlice.actions;
+export const { Login, LogOut, SetInfo, setRouter} = counterSlice.actions;
 
 export default counterSlice.reducer;

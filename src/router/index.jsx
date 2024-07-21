@@ -1,3 +1,4 @@
+import NotFind from "@/views/404";
 import Layout from "@/views/layout";
 import Login from "@/views/login";
 import React, { lazy } from "react";
@@ -21,15 +22,15 @@ const routes = [
         path: "/home",
         element: withLoadingComponent(<Home />),
       },
+      {
+        path: "*",
+        element: <NotFind />
+      },
     ],
   },
   {
     path: "/login",
     element: <Login />,
-  },
-  {
-    path: "*",
-    element: <Navigate to="/home" />,
   },
 ];
 
