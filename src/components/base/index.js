@@ -169,4 +169,8 @@ export default class ThreePlus {
     this.gui.add(this.eventObj, 'Fullscreen').name('全屏')
     this.gui.add(this.eventObj, 'ExitFullscreen').name('退出全屏')
   }
+
+  removeDom = () => {
+    this.domElement.removeChild(this.renderer.domElement)
+  }
 }

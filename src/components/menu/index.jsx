@@ -19,7 +19,7 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem("Option 1", "/page1", <PieChartOutlined />),
+  getItem("Option 1", "/home", <PieChartOutlined />),
   getItem("Option 2", "/page2", <DesktopOutlined />),
   getItem("User", "page3", <UserOutlined />, [
     getItem("Tom", "/page3/301"),

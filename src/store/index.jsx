@@ -1,15 +1,32 @@
 // store.js
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistReducer, persistStore } from "redux-persist";
+import storage from 'redux-persist/lib/storage';
+
+// 创建持久化配置
+const persistConfig = {
+  key: 'root',
+  storage,
+};
 
 // 引入你的root reducer
 import rootReducer from "./reducerModule/rootReducer";
 import userReducer from "./reducerModule/userReducer";
 
-const store = configureStore({
-  reducer: {
-    rootReducer: rootReducer,
-    userReducer: userReducer,
-  },
+const Reducer = combineReducers({
+  rootReducer: rootReducer,
+  userReducer: userReducer,
 });
 
-export default store;
+// 应用持久化配置
+const persistedReducer = persistReducer(persistConfig, Reducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
+export const persistor = persistStore(store);

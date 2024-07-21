@@ -1,6 +1,6 @@
-import { login } from "@/api/login";
+import { getInfo, login } from "@/api/login";
 import ThreePlus from "@/components/base";
-import { Login } from "@/store/reducerModule/userReducer";
+import { Login, SetInfo } from "@/store/reducerModule/userReducer";
 import { setToken } from "@/utils/auth";
 import { Button, Form, Input } from "antd";
 import { useEffect, useRef } from "react";
@@ -23,33 +23,45 @@ const LoginPage = () => {
 
   const screenDomys = useRef()
 
+  // 登录
   const onFinish = async (values) => {
     const res = await login(values)
     if(res.code === 200) {
       setToken(res.data.token);
       dispatch(Login(res))
-      navGateTo("/page1");
+      getMenuAndUserInfo()
+      navGateTo("/home");
     }
   };
 
+  // 获取菜单及用户信息
+  const getMenuAndUserInfo = async () => {
+    const res= await getInfo()
+    if(res.code === 200) {
+      dispatch(SetInfo(res))
+    }
+  }
+
+  // 初始化页面
   let first = true
   const initPage = () => {
     if(first) {
       initScene();
       addBg();
       addModel()
-      addModel2()
-      addLight()
-      addPlan()
-      addReflector()
+      // addModel2()
+      // addLight()
+      // addPlan()
+      // addReflector()
       move()
     }
     first = false
   }
+  // 初始化场景
   let ThreeInstence;
   const initScene = () => {
     ThreeInstence = new ThreePlus(screenDomys.current, screenDomys.current.offsetWidth, screenDomys.current.offsetHeight);
-    ThreeInstence.init(75, 1, 1000, { x: 0, y: 1, z: 7 }, true);
+    ThreeInstence.init(75, 1, 2000, { x: 0, y: 1, z: 10 }, true);
     ThreeInstence.resize()
   };
 
@@ -193,8 +205,9 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    initPage()
-  }, [])
+    initPage();
+  }
+  , [])
 
   return (
     <div className={styles.loginPage}>

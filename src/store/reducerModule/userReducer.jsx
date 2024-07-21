@@ -1,11 +1,11 @@
 // reducers.js
-import { getInfo } from "@/api/login";
-import { getToken } from "@/utils/auth";
+import { getToken, removeToken } from "@/utils/auth";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   // 初始状态
   token: getToken(),
+  userInfo: {},
   name: "",
   avatar: "",
   roles: [],
@@ -21,41 +21,43 @@ const counterSlice = createSlice({
       state.token = payload.data.token;
     },
     // 登出
-    LogOut: async (state) => {
+    LogOut: (state) => {
+      state.userInfo = {
+        name: '',
+        avatar: null
+      }
+      state.name = '';
+      state.avatar = null;
       state.token = "";
       state.roles = [];
       state.permissions = [];
+      removeToken()
     },
 
     // 获取用户信息
-    GetInfo(state) {
-      return new Promise((resolve, reject) => {
-        getInfo()
-          .then((res) => {
-            const user = res.user;
-            const avatar =
+    SetInfo: (state, { payload }) => {
+      const user = payload.data.user;
+      const avatar =
               user.avatar === ""
                 ? require("@/assets/images/profile.jpg")
-                : process.env.REACT_BASE_API + user.avatar;
-            if (res.roles && res.roles.length > 0) {
-              // 验证返回的roles是否是一个非空数组
-              state.roles = res.roles;
-              state.permissions = res.permissions;
-            } else {
-              state.roles = ["ROLE_DEFAULT"];
-            }
-            state.name = user.userName;
-            state.avatar = avatar;
-            resolve(res);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
+                : user.avatar;
+      if (payload.data.roles && payload.data.roles.length > 0) {
+        // 验证返回的roles是否是一个非空数组
+        state.roles = payload.data.roles;
+        state.permissions = payload.data.permissions;
+      } else {
+        state.roles = ["ROLE_DEFAULT"];
+      }
+      state.name = user.nickName;
+      state.avatar = avatar;
+      state.userInfo = {
+        name: user.nickName,
+        avatar: avatar
+      }
     },
   },
 });
 
-export const { Login, LogOut, GetInfo } = counterSlice.actions;
+export const { Login, LogOut, SetInfo } = counterSlice.actions;
 
 export default counterSlice.reducer;

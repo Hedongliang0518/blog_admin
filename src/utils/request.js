@@ -1,5 +1,5 @@
 ﻿import { logout } from "@/api/login";
-import store from '@/store';
+import { store } from '@/store';
 import { LogOut } from "@/store/reducerModule/userReducer";
 import { getToken, removeToken } from "@/utils/auth";
 import errorCode from "@/utils/errorCode";

@@ -1,8 +1,8 @@
-import Home from "@/views/home";
+import Layout from "@/views/layout";
+import Login from "@/views/login";
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
-const Login = lazy(() => import("@/views/login"));
-const Page1 = lazy(() => import("@/views/page1"));
+const Home = lazy(() => import("@/views/home"));
 
 const withLoadingComponent = (comp) => (
   <React.Suspense fallback={<div>Loading...</div>}>{comp}</React.Suspense>
@@ -11,15 +11,15 @@ const withLoadingComponent = (comp) => (
 const routes = [
   {
     path: "/",
-    element: <Navigate to="/page1" />,
+    element: <Navigate to="/home" />,
   },
   {
     path: "/",
-    element: <Home />,
+    element: <Layout />,
     children: [
       {
-        path: "/page1",
-        element: withLoadingComponent(<Page1 />),
+        path: "/home",
+        element: withLoadingComponent(<Home />),
       },
     ],
   },
@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: "*",
-    element: <Navigate to="/page1" />,
+    element: <Navigate to="/home" />,
   },
 ];
 
