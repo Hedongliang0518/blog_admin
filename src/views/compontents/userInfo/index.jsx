@@ -55,7 +55,7 @@ const User = () => {
   return (<div>
     <Image width={40} src={userInfo.avatar} style={{borderRadius: "50%", overflow: "hidden"}} />
     <Dropdown menu={{ items }} placement="bottomLeft">
-      <span style={{marginLeft: '10px', cursor: "pointer"}}>{userInfo.name || '-'}</span>
+      <span style={{marginLeft: '10px', cursor: "pointer", color: '#fff'}}>{userInfo.name || '-'}</span>
     </Dropdown>
   </div>)
 }

@@ -19,7 +19,9 @@ const App = () => {
   return (
     <Layout className={styles.layoutBox}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="demo-logo-vertical" />
+        <div className={styles.logoBox} >
+          <img src="/public/imgs/page/logo.jpg" alt="logo" className={styles.logoImg}/>
+        </div>
         <Menu getBreadcrumb={getBreadcrumb}/>
       </Sider>
       <Layout>

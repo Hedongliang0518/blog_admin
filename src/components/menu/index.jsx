@@ -125,6 +125,8 @@ const MenuComp = (props) => {
         setOpenKeys([item.key]);
         getPath(newList, [isKey.key, item.key])
         getBreadcrumb(paths)
+      } else {
+        getBreadcrumb([{title: '首页'}])
       }
     });
   }
