@@ -3,6 +3,10 @@ import * as THREE from "three";
 import { gsap } from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import ArticleCount from './compontents/articleCount';
+import ArticlePier from './compontents/articlePier';
+import ImgCount from './compontents/imgCount';
+import TargetCount from './compontents/targetCount';
 import styles from './index.module.less';
 const Home = () => {
   // 坐标轴转换
@@ -321,8 +325,14 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <div className={styles.container} ref={screenDom}></div>
-      <div className={styles.leftBox}></div>
-      <div className={styles.rightBox}></div>
+      <div className={styles.leftBox}>
+        <ImgCount />
+        <ArticlePier/>
+      </div>
+      <div className={styles.rightBox}>
+        <ArticleCount/>
+        <TargetCount/>
+      </div>
     </div>
   );
 };
