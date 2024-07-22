@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const parseTime = (time, cFormat) => {
   if (arguments.length === 0 || !time) {
     return null;
@@ -75,3 +77,11 @@ export const formatTime = (time, option) => {
     );
   }
 };
+
+/**
+ * 获取UUID
+ * @returns
+ */
+export function getUUID() {
+  return uuidv4()
+}
