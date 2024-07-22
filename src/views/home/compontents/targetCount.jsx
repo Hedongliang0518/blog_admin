@@ -8,7 +8,7 @@ const ImgCount = () => {
       type: 0, //0-5 0 为 优  良 轻度 中度 重度 严重
       widthString: '300px', // 宽度,
       text: '50%', //显示文本
-      fontSize: '50px', //文本字号
+      fontSize: '20px', //文本字号
       amplitude: 12, //水波振幅
     },
   ];
