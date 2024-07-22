@@ -50,7 +50,6 @@ service.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
     Promise.reject(error);
   },
 );
@@ -86,7 +85,6 @@ service.interceptors.response.use(
     }
   },
   (error) => {
-    console.log("err" + error);
     let { message: msg } = error;
     if (msg === "Network Error") {
       msg = "后端接口连接异常";

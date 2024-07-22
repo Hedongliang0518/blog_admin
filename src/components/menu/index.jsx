@@ -141,7 +141,6 @@ const MenuComp = (props) => {
 
   // 菜单点击事件
   const menuClick = ({ item, key, keyPath, domEvent }) => {
-    console.log( item, key, keyPath, domEvent );
     getPath(menu, keyPath)
     getBreadcrumb(paths)
     // 路由跳转

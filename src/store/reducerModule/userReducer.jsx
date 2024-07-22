@@ -58,7 +58,6 @@ const counterSlice = createSlice({
     },
     // 登录
     setRouter: (state, { payload }) => {
-      console.log('payload', payload);
       state.routerList = payload;
     },
   },
