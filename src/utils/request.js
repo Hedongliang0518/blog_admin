@@ -1,5 +1,4 @@
-﻿import { logout } from "@/api/login";
-import { store } from '@/store';
+﻿import { store } from '@/store';
 import { LogOut } from "@/store/reducerModule/userReducer";
 import { getToken, removeToken } from "@/utils/auth";
 import errorCode from "@/utils/errorCode";
@@ -63,12 +62,15 @@ service.interceptors.response.use(
     const msg = errorCode[code] || res.data.msg || errorCode["default"];
     if (code === 401) {
       message.error(msg);
-      const res = await logout(getToken())
-      if(res.code === 200) {
-        removeToken();
-        store.dispatch(LogOut)
-        location.href = "/login";
-      }
+      // const res = await logout(getToken())
+      // if(res.code === 200) {
+      //   removeToken();
+      //   store.dispatch(LogOut)
+      //   location.href = "/login";
+      // }
+      removeToken();
+      store.dispatch(LogOut)
+      location.href = "/login";
       return {code: 401, msg: msg, data: null};
     } else if (code === 500) {
       message.error(msg);

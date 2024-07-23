@@ -74,7 +74,7 @@ const Write = () => {
   }, [])
 
   return (
-    <div className={styles.formBox}>
+    <div className="viewBox">
       <Form form={form}>
         <Row className={styles.btnBox}>
           <Col className={styles.btnContent}>
@@ -89,7 +89,7 @@ const Write = () => {
             <Form.Item
               name="title"
               label="文章标题"
-              className={styles.searchItem}
+              className="searchItem"
               required
               rules={[{ required: true, message: '请填写文章标题!' }]}>
               <Input placeholder="请输入" allowClear />
@@ -99,7 +99,7 @@ const Write = () => {
             <Form.Item
               name="categoryId"
               label="分类"
-              className={styles.searchItem}
+              className="searchItem"
               required
               rules={[{ required: true, message: '请选择分类!' }]}>
               <Select placeholder="请选择" options={categoryList} allowClear />
@@ -109,7 +109,7 @@ const Write = () => {
             <Form.Item
               name="tags"
               label="标签"
-              className={styles.searchItem}
+              className="searchItem"
               required
               rules={[{ required: true, message: '请选择标签!' }]}>
               <Select placeholder="请选择" options={tagList} allowClear />
@@ -118,12 +118,12 @@ const Write = () => {
         </Row>
         <Row>
           <Col span={8}>
-            <Form.Item name="summary" label="文章摘要" className={styles.searchItem}>
+            <Form.Item name="summary" label="文章摘要" className="searchItem">
               <TextArea placeholder="请输入" rows={4} allowClear/>
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item name="isComment" label="允许评论" className={styles.searchItem}>
+            <Form.Item name="isComment" label="允许评论" className="searchItem">
               <Radio.Group >
                 <Radio value={'0'}>正常</Radio>
                 <Radio value={'1'}>停用</Radio>
@@ -131,7 +131,7 @@ const Write = () => {
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item name="isTop" label="是否置顶" className={styles.searchItem}>
+            <Form.Item name="isTop" label="是否置顶" className="searchItem">
               <Radio.Group >
                 <Radio value={'0'}>是</Radio>
                 <Radio value={'1'}>否</Radio>
@@ -141,7 +141,7 @@ const Write = () => {
         </Row>
         <Row>
           <Col span={8}>
-            <Form.Item name="thumbnail" label="缩略图" className={styles.searchItem}>
+            <Form.Item name="thumbnail" label="缩略图" className="searchItem">
               <Upload
                 listType="picture-card"
                 fileList={imageUrlList}
@@ -160,7 +160,7 @@ const Write = () => {
         </Row>
         <Row>
           <Col span={24}>
-            <Form.Item name="thumbnail" label="" className={styles.searchItem}>
+            <Form.Item name="thumbnail" label="" className="searchItem">
               <MdEditor modelValue={md} onChange={(v) => {console.log(v); setMd(v)}} />
             </Form.Item>
           </Col>
