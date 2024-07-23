@@ -1,4 +1,4 @@
-import { addArticle } from '@/api/content/article';
+import { addArticle, getArticle, updateArticle } from '@/api/content/article';
 import { listAllCategory } from '@/api/content/category';
 import { listAllTag } from '@/api/content/tag';
 import { uploadImg } from '@/api/content/upload';
@@ -8,7 +8,7 @@ import { Button, Col, Form, Input, message, Radio, Row, Select, Space, Upload } 
 import { MdEditor } from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from './index.module.less';
 
 const { TextArea } = Input;
@@ -18,9 +18,15 @@ const Write = () => {
   const [tagList, setTagList] = useState([]); // 标签列表
   const [imageUrlList, setimageUrlList] = useState([]) // 图片列表
   const [md, setMd] = useState(''); // md数据
+  const [arcId, setArcId] = useState(''); // 文章id
   const [form] = Form.useForm() // 定义表单数据
 
   const navGateTo = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const getQueryParam = (paramName) => {
+    return searchParams.get(paramName);
+  }
 
   // 获取分类列表
   const getCategoryList = async () => {
@@ -57,18 +63,48 @@ const Write = () => {
   // 保存草稿
   const handleSave = (type) => {
     form.validateFields().then(async (values) => {
-      const data = { ...values, content: md, thumbnail: imageUrlList[0]?.url, status: type }
-      const res = await addArticle(data)
-      if (res.code === 200) {
-        message.success(type === "0" ? '发布成功' : '保存成功')
-        if(type === "0") {
-          navGateTo("/");
+      const data = { ...values, tags: [values.tags], content: md, thumbnail: imageUrlList[0]?.url, status: type }
+      if(!arcId) {
+        const res = await addArticle(data)
+        if (res.code === 200) {
+          message.success(type === "0" ? '发布成功' : '保存成功')
+          if(type === "0") {
+            navGateTo("/article");
+          }
+        }
+      } else {
+        const res = await updateArticle({...data, id: arcId})
+        if (res.code === 200) {
+          message.success('更新成功')
+          navGateTo("/article");
         }
       }
     })
   }
 
+  // 获取文章详情
+  const queryArticle = async (id) => {
+    const res = await getArticle(id)
+    if(res.code === 200) {
+      form.setFieldsValue({
+        title: res.data.title,
+        categoryId: res.data.categoryId,
+        tags: res.data.tags[0],
+        summary: res.data.summary,
+        isComment: res.data.isComment,
+        isTop: res.data.isTop,
+      })
+      setMd(res.data.content)
+      setimageUrlList([{ uid: getUUID(), url: res.data.thumbnail }])
+    }
+  }
+
   useEffect(() => {
+    const id = getQueryParam('id')
+    if(id) {
+      setArcId(id)
+      queryArticle(id)
+    }
     getCategoryList()
     getTagList()
   }, [])
@@ -79,8 +115,8 @@ const Write = () => {
         <Row className={styles.btnBox}>
           <Col className={styles.btnContent}>
             <Space wrap>
-              <Button onClick={() => handleSave("1")}>保存草稿</Button>
-              <Button type="primary" onClick={() => handleSave("0")}>提交</Button>
+              {!arcId ? <Button onClick={() => handleSave("1")}>保存草稿</Button> : null}
+              <Button type="primary" onClick={() => handleSave("0")}>{arcId ? '更新' : '提交'}</Button>
             </Space>
           </Col>
         </Row>
@@ -161,7 +197,7 @@ const Write = () => {
         <Row>
           <Col span={24}>
             <Form.Item name="thumbnail" label="" className="searchItem">
-              <MdEditor modelValue={md} onChange={(v) => {console.log(v); setMd(v)}} />
+              <MdEditor modelValue={md} onChange={(v) =>  setMd(v)} />
             </Form.Item>
           </Col>
         </Row>

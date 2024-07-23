@@ -21,6 +21,7 @@ module.exports = {
     // quotes: ["error", "single"], // 使用单引号
     eqeqeq: 2, //必须使用全等
     "no-unused-vars": 0,
+    "react-hooks/exhaustive-deps": 0,
     "no-undef": 0,
     "no-debugger": 0,
     "no-constant-condition": 2, // 禁止在条件中使用常量表达式 if(true) if(1)

@@ -115,11 +115,13 @@ const Article = () => {
       pageNum: current || page,
       pageSize: size || pageSize
     }
+    setLoading(true)
     const res = await listArticle(data)
     if (res.code === 200) {
       setTableData(res.data.rows)
       setTotal(res.data.total)
     }
+    setLoading(false)
   }
 
   // 修改按钮操作
