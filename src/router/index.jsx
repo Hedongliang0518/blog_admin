@@ -5,6 +5,7 @@ import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 const Home = lazy(() => import("@/views/home"));
 const Write = lazy(() => import("@/views/system/write"));
+const User = lazy(() => import("@/views/system/user"));
 const Article = lazy(() => import("@/views/content/article"));
 
 const withLoadingComponent = (comp) => (
@@ -27,6 +28,10 @@ const routes = [
       {
         path: "/write",
         element: withLoadingComponent(<Write />),
+      },
+      {
+        path: "/user",
+        element: withLoadingComponent(<User />),
       },
       {
         path: "/article",

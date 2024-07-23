@@ -1,3 +1,5 @@
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 import "normalize.css/normalize.css"; // 重置默认样式
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -13,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <App />
+          <ConfigProvider locale={zhCN}>
+            <App />
+          </ConfigProvider>
         </BrowserRouter>
       </PersistGate>
     </Provider>

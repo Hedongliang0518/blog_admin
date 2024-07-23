@@ -69,7 +69,7 @@ const Article = () => {
         return (
           <Space>
             <a onClick={() => handleUpdate(record)}>
-              查看
+              修改
             </a>
             <Popconfirm
               placement="top"
