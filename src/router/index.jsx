@@ -9,6 +9,9 @@ const User = lazy(() => import('@/views/system/user'));
 const Role = lazy(() => import('@/views/system/role'));
 const Menu = lazy(() => import('@/views/system/menu'));
 const Article = lazy(() => import('@/views/content/article'));
+const Category = lazy(() => import('@/views/content/category'));
+const Link = lazy(() => import('@/views/content/link'));
+const Tag = lazy(() => import('@/views/content/tag'));
 
 const withLoadingComponent = (comp) => <React.Suspense fallback={<div>Loading...</div>}>{comp}</React.Suspense>;
 
@@ -44,6 +47,18 @@ const routes = [
       {
         path: '/article',
         element: withLoadingComponent(<Article />),
+      },
+      {
+        path: '/category',
+        element: withLoadingComponent(<Category />),
+      },
+      {
+        path: '/link',
+        element: withLoadingComponent(<Link />),
+      },
+      {
+        path: '/tag',
+        element: withLoadingComponent(<Tag />),
       },
       {
         path: '*',
