@@ -21,6 +21,7 @@ const AddUser = (props) => {
       const data = {
         attributionTime: dayjs(values.attributionTime).format('YYYY-MM-DD'),
         photoPath: path,
+        createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       };
       const res = await addPhoto(data);
       if (res.code === 200) {
