@@ -12,6 +12,7 @@ const Article = lazy(() => import('@/views/content/article'));
 const Category = lazy(() => import('@/views/content/category'));
 const Link = lazy(() => import('@/views/content/link'));
 const Tag = lazy(() => import('@/views/content/tag'));
+const Photo = lazy(() => import('@/views/content/photo'));
 
 const withLoadingComponent = (comp) => <React.Suspense fallback={<div>Loading...</div>}>{comp}</React.Suspense>;
 
@@ -47,6 +48,10 @@ const routes = [
       {
         path: '/article',
         element: withLoadingComponent(<Article />),
+      },
+      {
+        path: '/photos',
+        element: withLoadingComponent(<Photo />),
       },
       {
         path: '/category',

@@ -134,3 +134,7 @@ export function handleTree(data, id, parentId, children) {
   }
   return tree;
 }
+
+export const isEmptyObject = (obj) => {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+};
