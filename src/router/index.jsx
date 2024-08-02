@@ -1,6 +1,7 @@
 import NotFind from '@/views/404';
 import Layout from '@/views/layout';
 import Login from '@/views/login';
+import { Spin } from 'antd';
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 const Home = lazy(() => import('@/views/home'));
@@ -14,7 +15,17 @@ const Link = lazy(() => import('@/views/content/link'));
 const Tag = lazy(() => import('@/views/content/tag'));
 const Photo = lazy(() => import('@/views/content/photo'));
 
-const withLoadingComponent = (comp) => <React.Suspense fallback={<div>Loading...</div>}>{comp}</React.Suspense>;
+const withLoadingComponent = (comp) => (
+  <React.Suspense
+    fallback={
+      <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Spin />
+      </div>
+    }
+  >
+    {comp}
+  </React.Suspense>
+);
 
 const routes = [
   {
