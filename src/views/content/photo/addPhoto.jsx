@@ -2,7 +2,7 @@ import { addPhoto } from '@/api/content/photo';
 import { uploadImg } from '@/api/content/upload';
 import { getUUID } from '@/utils';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { Button, Col, DatePicker, Form, message, Modal, Row, Space, Upload } from 'antd';
+import { Button, Col, DatePicker, Form, Input, message, Modal, Row, Space, Upload } from 'antd';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
@@ -21,6 +21,7 @@ const AddUser = (props) => {
       const data = {
         attributionTime: dayjs(values.attributionTime).format('YYYY-MM-DD'),
         photoPath: path,
+        remark: values.remark,
         createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       };
       const res = await addPhoto(data);
@@ -85,6 +86,13 @@ const AddUser = (props) => {
                   rules={[{ required: true, message: '请选择名称' }]}
                 >
                   <DatePicker onChange={onChange} allowClear />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row>
+              <Col span={24}>
+                <Form.Item name='remark' label='照片描述' className='searchItem'>
+                  <Input allowClear />
                 </Form.Item>
               </Col>
             </Row>
