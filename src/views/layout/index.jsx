@@ -4,6 +4,7 @@ import { Breadcrumb, Layout } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styles from './index.module.less';
+import logo from '/public/imgs/page/logo.jpg';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -13,22 +14,21 @@ const App = () => {
 
   // 获取面包屑数据
   const getBreadcrumb = (data) => {
-    setBreadcrumb(data)
-  }
+    setBreadcrumb(data);
+  };
 
   return (
     <Layout className={styles.layoutBox}>
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className={styles.logoBox} >
-          <img src="/public/imgs/page/logo.jpg" alt="logo" className={styles.logoImg}/>
+        <div className={styles.logoBox}>
+          <img src={logo} alt='logo' className={styles.logoImg} />
         </div>
-        <Menu getBreadcrumb={getBreadcrumb}/>
+        <Menu getBreadcrumb={getBreadcrumb} />
       </Sider>
       <Layout>
-        <Header className={styles.headerBox} style={{ padding: 0, background: '#001529' }} >
+        <Header className={styles.headerBox} style={{ padding: 0, background: '#001529' }}>
           {/* 面包屑区域 */}
-          <Breadcrumb className={styles.breadcrumbBox} items={breadcrumb}>
-          </Breadcrumb>
+          <Breadcrumb className={styles.breadcrumbBox} items={breadcrumb}></Breadcrumb>
           {/* 用户信息区域 */}
           <div className={styles.userBox}>
             <User />
