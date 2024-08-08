@@ -48,7 +48,7 @@ const Photo = () => {
           acc[item.attributionTime] = [];
         }
         // 将当前项添加到对应 name 的数组中
-        item.photoList = item.photoPath.split(',');
+        item.photoList = item.photoPath?.split(',');
         acc[item.attributionTime].push(item);
         // 返回累加器以供下一次迭代
         return acc;
@@ -121,7 +121,7 @@ const Photo = () => {
           {Object.keys(imgList).map((key, i) => (
             <>
               <div key={getUUID()} className={styles.date}>
-                {key.split(' ')[0]}
+                {key?.split(' ')[0]}
               </div>
               {imgList[key].map((item) => (
                 <div key={getUUID()} className={styles.imgBox}>
